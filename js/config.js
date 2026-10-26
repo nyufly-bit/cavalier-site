@@ -31,5 +31,5 @@ window.CAVALIER_CONFIG = {
   SITE_URL: "https://cavalierride.com/",
 
   // Contact shown in the footer. Leave "" to hide.
-  CONTACT_EMAIL: ""
+  CONTACT_EMAIL: "hello@cavalierride.com"
 };
