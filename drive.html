@@ -167,15 +167,18 @@
       <div class="wrap narrow">
         <h2 id="req-title">What you'll need</h2>
         <p class="tbd-banner">Final details will be confirmed before launch.</p>
-        <ul class="req-list">
-          <li>A NY Class E driver's license, or the ability to get one before your first Cavalier ride</li>
-          <li>A commercial livery insurance policy and livery plates in your own name, or the ability to get them before your first Cavalier ride</li>
-          <li>A clean driving record</li>
-          <li>A vehicle 10 years old or newer. Standard: a mid-size or full-size sedan (no compact or subcompact cars). XL: an SUV or minivan with seats for at least 6 riders.</li>
-          <li>A background check</li>
-          <li>A smartphone to run the driver app</li>
-          <li>Able to speak and understand English well enough to talk with riders and the Cavalier team (reading English is a plus, since driver updates go out by email and text)</li>
+        <p class="req-intro" id="req-intro" hidden><strong>Check off each one to unlock sign-up.</strong></p>
+        <ul class="req-list req-checklist" id="req-list" aria-labelledby="req-title">
+          <li><label class="req-item" for="req-1"><input class="req-check" id="req-1" type="checkbox"><span class="req-box" aria-hidden="true"></span><span class="req-text">A NY Class E driver's license, or the ability to get one before your first Cavalier ride</span></label></li>
+          <li><label class="req-item" for="req-2"><input class="req-check" id="req-2" type="checkbox"><span class="req-box" aria-hidden="true"></span><span class="req-text">A commercial livery insurance policy and livery plates in your own name, or the ability to get them before your first Cavalier ride</span></label></li>
+          <li><label class="req-item" for="req-3"><input class="req-check" id="req-3" type="checkbox"><span class="req-box" aria-hidden="true"></span><span class="req-text">A clean driving record</span></label></li>
+          <li><label class="req-item" for="req-4"><input class="req-check" id="req-4" type="checkbox"><span class="req-box" aria-hidden="true"></span><span class="req-text">A vehicle 10 years old or newer. Standard: a mid-size or full-size sedan (no compact or subcompact cars). XL: an SUV or minivan with seats for at least 6 riders.</span></label></li>
+          <li><label class="req-item" for="req-5"><input class="req-check" id="req-5" type="checkbox"><span class="req-box" aria-hidden="true"></span><span class="req-text">A background check</span></label></li>
+          <li><label class="req-item" for="req-6"><input class="req-check" id="req-6" type="checkbox"><span class="req-box" aria-hidden="true"></span><span class="req-text">A smartphone to run the driver app</span></label></li>
+          <li><label class="req-item" for="req-7"><input class="req-check" id="req-7" type="checkbox"><span class="req-box" aria-hidden="true"></span><span class="req-text">Able to speak and understand English well enough to talk with riders and the Cavalier team (reading English is a plus, since driver updates go out by email and text)</span></label></li>
         </ul>
+        <p class="req-progress" id="req-progress" aria-live="polite" hidden></p>
+        <div class="req-eligible" id="req-eligible" hidden><p><strong>You're eligible: sign up below.</strong></p><a class="btn btn-primary btn-block" href="#signup" id="req-go">Continue to sign-up</a></div>
         <p class="fine">Signing up now doesn't commit you to anything. We'll contact you with the full requirements and next steps.</p>
       </div>
     </section>
@@ -216,6 +219,10 @@
         <p class="section-lede">Takes about a minute. No commitment.</p>
 
         <div id="driver-panel">
+          <div class="lock-note" id="lock-note" hidden role="status">
+            <p><strong>Check off every requirement above to sign up.</strong> <span id="lock-count"></span></p>
+            <a class="btn btn-small" href="#requirements" id="lock-go">Go to the checklist</a>
+          </div>
           <form id="driver-form" class="form form-card" novalidate>
             <div class="field">
               <label for="d-name">Full name</label>

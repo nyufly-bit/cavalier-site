@@ -251,6 +251,57 @@
     $("#signup").scrollIntoView({ block: "start" }); $("#d-name").focus({ preventScroll: true });
   });
 
+  /* ---------- requirements checklist gates the sign-up form ----------
+   * Progressive enhancement: the form is only locked once this script runs. Without JS it works as before. */
+  (function () {
+    var checks = $$(".req-check"), card = form, total = checks.length;
+    if (!total || !card) return;
+    var progress = $("#req-progress"), eligible = $("#req-eligible"), note = $("#lock-note"), count = $("#lock-count");
+    var fields = Array.prototype.slice.call(card.elements);
+    var KEY = "cavalier_driver_reqs", wasDone = null;
+    $("#req-intro").hidden = false; progress.hidden = false;
+    // Remember checks for this browser session so a reload doesn't wipe them.
+    try { var saved = JSON.parse(sessionStorage.getItem(KEY) || "[]"); checks.forEach(function (c, i) { c.checked = !!saved[i]; }); } catch (e) { /* ignore */ }
+    function done() { return checks.filter(function (c) { return c.checked; }).length; }
+    function render() {
+      var n = done(), all = n === total;
+      progress.innerHTML = "";
+      progress.appendChild(document.createTextNode(n + " of " + total + " checked"));
+      var bar = document.createElement("span"); bar.className = "req-bar"; bar.setAttribute("aria-hidden", "true");
+      var fill = document.createElement("i"); fill.style.width = (n / total * 100) + "%"; bar.appendChild(fill); progress.appendChild(bar);
+      eligible.hidden = !all; note.hidden = all;
+      count.textContent = all ? "" : "(" + n + " of " + total + " checked)";
+      card.classList.toggle("is-locked", !all);
+      card.setAttribute("aria-disabled", all ? "false" : "true");
+      if (all) card.removeAttribute("inert"); else card.setAttribute("inert", "");
+      fields.forEach(function (el) { el.disabled = !all; });
+      try { sessionStorage.setItem(KEY, JSON.stringify(checks.map(function (c) { return c.checked; }))); } catch (e) { /* ignore */ }
+      if (all && wasDone === false) eligible.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      wasDone = all;
+    }
+    checks.forEach(function (c) { c.addEventListener("change", render); });
+    // Belt and braces: never submit while locked.
+    card.addEventListener("submit", function (e) { if (done() < total) { e.preventDefault(); e.stopImmediatePropagation(); } }, true);
+    function toChecklist() {
+      var first = checks.filter(function (c) { return !c.checked; })[0] || checks[0];
+      $("#requirements").scrollIntoView({ behavior: "smooth", block: "start" });
+      first.focus({ preventScroll: true });
+    }
+    // Any "sign up" link lands on the checklist first while the form is locked.
+    $$('a[href="#signup"]').forEach(function (a) {
+      if (a.id === "req-go") return;
+      a.addEventListener("click", function (e) { if (done() < total) { e.preventDefault(); toChecklist(); } });
+    });
+    $("#lock-go").addEventListener("click", function (e) { e.preventDefault(); toChecklist(); });
+    $("#req-go").addEventListener("click", function (e) {
+      e.preventDefault();
+      $("#signup").scrollIntoView({ behavior: "smooth", block: "start" });
+      $("#d-name").focus({ preventScroll: true });
+    });
+    render();
+    if (location.hash === "#signup" && done() < total) setTimeout(toChecklist, 50);
+  })();
+
   /* ---------- footer ---------- */
   $("#year").textContent = new Date().getFullYear();
   if (CFG.CONTACT_EMAIL) { var fc = $("#footer-contact"); fc.innerHTML = 'Questions? <a href="mailto:' + encodeURI(CFG.CONTACT_EMAIL) + '"></a>'; fc.querySelector("a").textContent = CFG.CONTACT_EMAIL; fc.hidden = false; }
