@@ -23,7 +23,7 @@ window.CAVALIER_CONFIG = {
 
   // Where sign-ups are sent (Google Apps Script web app URL, Formspree, etc.).
   // Empty = demo mode: sign-ups are only saved in this browser (localStorage).
-  FORM_ENDPOINT: "",
+  FORM_ENDPOINT: "https://script.google.com/macros/s/AKfycbweRZPwVWXXVjhkdldUXwUAN-Y3CY6NhUIFV19Oo9G1lNEZGcZ0loMlRxntXGJ5l2QloQ/exec",
 
   // Public address of the rider page. Printed QR codes (print.html) always point here,
   // even if you open print.html from a test address, so cards keep working after you move hosts.
