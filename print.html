@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Print your Cavalier seat-back cards</title>
+  <meta name="description" content="Print Cavalier seat-back cards and hand-out cards with your personal rider referral QR code.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#060606">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/print.css">
+  <style id="page-size">@page { size: 8.5in 11in; margin: 0; }</style>
+</head>
+<body class="print-tool">
+  <header class="site-header no-print">
+    <div class="wrap header-inner">
+      <a class="brand" href="./" aria-label="Cavalier home"><img class="brand-logo" src="assets/mark-96.png" width="34" height="34" alt=""><span class="brand-name">Cavalier</span></a>
+      <nav class="header-nav" aria-label="Pages">
+        <a href="./" class="nav-plain">Ride</a>
+        <a href="drive.html" class="nav-cta">Drive</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="pt-main no-print">
+    <div class="wrap">
+      <h1 class="pt-title">Print your seat-back cards</h1>
+      <p class="pt-lede">Enter your driver code to put your personal QR code on every card. Riders who scan it and join the rider list are credited to you.</p>
+
+      <form class="pt-controls" id="pt-form" novalidate>
+        <div class="pt-row">
+          <div class="field pt-code-field">
+            <label for="pt-code">Your driver code</label>
+            <div class="pt-code-row">
+              <input id="pt-code" name="code" type="text" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="e.g. MARCUS-ZX34" maxlength="20">
+              <button class="btn btn-primary btn-small" type="submit">Update</button>
+            </div>
+            <p class="pt-hint" id="pt-code-hint">It's on your sign-up confirmation screen.</p>
+            <label class="check pt-nocode"><input type="checkbox" id="pt-nocode"> <span>General card with no driver code</span></label>
+          </div>
+        </div>
+
+        <fieldset class="field">
+          <legend>What do you want to print?</legend>
+          <div class="pt-layouts" role="radiogroup">
+            <label class="pt-layout"><input type="radio" name="layout" value="seatback" checked><span><strong>Seat-back card</strong><small>8.5 × 11 in. Fits standard seat-back holders.</small></span></label>
+            <label class="pt-layout"><input type="radio" name="layout" value="half"><span><strong>Half-size card</strong><small>5.5 × 8.5 in. Smaller holders and table tents.</small></span></label>
+            <label class="pt-layout"><input type="radio" name="layout" value="cards"><span><strong>Hand-out cards</strong><small>3.5 × 2 in, 10 per sheet, front and back.</small></span></label>
+          </div>
+        </fieldset>
+
+        <div class="pt-row pt-options">
+          <fieldset class="field">
+            <legend>Background</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="theme" value="dark" checked><span>Black (best look)</span></label>
+              <label class="chip"><input type="radio" name="theme" value="light"><span>White (saves ink)</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="field" id="pt-half-opt" hidden>
+            <legend>Half-size paper</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="half" value="2up" checked><span>2 per letter sheet</span></label>
+              <label class="chip"><input type="radio" name="half" value="single"><span>One 5.5 × 8.5 page</span></label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="pt-print-row">
+          <button class="btn btn-primary" type="button" id="pt-print">Print / Save as PDF</button>
+          <p class="pt-url">QR code opens <code id="pt-url"></code></p>
+        </div>
+        <p class="pt-warn" id="pt-warn" hidden></p>
+        <div class="pt-tips" id="pt-tips"></div>
+      </form>
+    </div>
+  </main>
+
+  <section class="pt-preview" id="pt-preview" aria-label="Print preview"></section>
+
+  <footer class="site-footer no-print">
+    <div class="wrap">
+      <p><a href="./">Rider waitlist</a> · <a href="drive.html">Drive with Cavalier</a></p>
+      <p class="fine">QR code generator: MIT license, Kazuhiko Arase. Montserrat font: SIL Open Font License 1.1.</p>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/vendor/qrcode.js"></script>
+  <script src="js/print.js"></script>
+</body>
+</html>

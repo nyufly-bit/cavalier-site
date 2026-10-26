@@ -1,0 +1,170 @@
+/* Cavalier print generator (print.html): screen UI + real-size print layouts. Sizes are in inches. */
+@font-face{font-family:"Montserrat Print";src:url("../assets/fonts/montserrat-latin.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:block}
+
+/* ---------- screen UI ---------- */
+.print-tool{background:var(--bg-alt)}
+.pt-main{padding:32px 0 8px}
+.pt-title{font-size:1.9rem;letter-spacing:-.02em;margin-bottom:6px}
+.pt-lede{color:var(--muted);margin:0 0 20px;max-width:40em}
+.pt-controls{display:grid;gap:20px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.pt-code-row{display:grid;grid-template-columns:1fr auto;gap:8px}
+.pt-code-row input{font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.pt-code-row .btn{min-height:50px}
+.pt-hint{margin:0;color:var(--muted);font-size:.85rem}
+.pt-nocode{margin-top:6px}
+.pt-layouts{display:grid;gap:10px}
+.pt-layout{position:relative;cursor:pointer;margin:0!important}
+.pt-layout input{position:absolute;opacity:0}
+.pt-layout span{display:grid;gap:2px;border:1.5px solid #d2d2d2;border-radius:12px;padding:12px 14px;background:#fff}
+.pt-layout small{color:var(--muted);font-size:.85rem}
+.pt-layout input:checked+span{border-color:var(--black);box-shadow:inset 0 0 0 1.5px var(--black);background:#fffaea}
+.pt-layout input:focus-visible+span{outline:3px solid var(--gold);outline-offset:2px}
+.pt-options{display:grid;gap:16px}
+.pt-print-row{display:grid;gap:8px}
+.pt-url{margin:0;font-size:.85rem;color:var(--muted);word-break:break-all}
+.pt-url code{color:var(--black);font-weight:600}
+.pt-warn{margin:0;background:#fff8e6;border:1px solid #f5dc96;border-radius:10px;padding:10px 12px;font-size:.92rem}
+.pt-tips p{margin:0;font-size:.92rem;color:var(--ink);background:var(--bg-alt);border-radius:10px;padding:10px 12px}
+@media (min-width:720px){
+  .pt-layouts{grid-template-columns:repeat(3,1fr)}
+  .pt-options{grid-template-columns:auto auto;justify-content:start;column-gap:40px}
+  .pt-print-row{grid-template-columns:auto 1fr;align-items:center;gap:16px}
+  .pt-code-field{max-width:460px}
+}
+.pt-preview{padding:24px 20px 48px;display:grid;justify-items:center;gap:28px}
+.sheet-wrap{width:100%;max-width:900px;display:grid;justify-items:center}
+.sheet-label{margin:0 0 8px;font-weight:700;font-size:.9rem;color:var(--muted)}
+.sheet-scale{position:relative;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.18)}
+.sheet-scale .sheet{transform-origin:0 0}
+
+/* ---------- sheets (real size) ---------- */
+.sheet{position:relative;overflow:hidden;background:#fff;color:#060606;font-family:"Montserrat Print",Montserrat,"Helvetica Neue",Arial,sans-serif;line-height:1.2;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet *{box-sizing:border-box}
+.sheet p,.sheet h2,.sheet ul{margin:0;padding:0}
+.sheet img{display:block;max-width:none}
+.sheet--letter{width:8.5in;height:11in}
+.sheet--letter-land{width:11in;height:8.5in;display:flex}
+.sheet--half{width:5.5in;height:8.5in}
+.qr-svg{display:block;width:100%;height:100%}
+
+/* ---------- poster (seat-back card) ---------- */
+.poster{width:100%;height:100%;padding:.25in}            /* white frame: safe on printers that can't print to the edge */
+.sheet--letter-land .poster{width:5.5in;height:8.5in;flex:none;padding:.22in}
+.sheet--half .poster{padding:.22in}
+.p-panel{height:100%;border-radius:.22in;background:#060606;color:#fff;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.p-panel::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 60% at 100% 0%,rgba(246,198,65,.20) 0%,rgba(246,198,65,0) 60%);pointer-events:none}
+.p-panel>*{position:relative}
+.p-brand{display:flex;align-items:center}
+.c-mark{border-radius:50%}
+.p-head{font-weight:800;letter-spacing:-.02em;line-height:1.05}
+.p-head span{display:block;color:#F6C641;font-weight:700;letter-spacing:-.01em;margin-top:.12em}
+.p-benefits{list-style:none;display:grid}
+.p-benefits li{display:flex;align-items:center;color:#e9e9e9;font-weight:500}
+.p-benefits b{color:#fff;font-weight:700}
+.p-tick{flex:none;border-radius:50%;background:#F6C641;position:relative}
+.p-tick::after{content:"";position:absolute;left:50%;top:45%;width:28%;height:50%;border:solid #060606;border-width:0 .16em .16em 0;transform:translate(-50%,-50%) rotate(45deg)}
+.p-qrblock{display:flex;align-items:center}
+.p-qrbox{flex:none;background:#fff;border-radius:.12in}
+.p-cta{font-weight:800;color:#F6C641;line-height:1.1}
+.p-ctasub{color:#d6d6d6;font-weight:500;text-wrap:balance}
+.p-code{color:#bdbdbd;font-weight:500}
+.p-code span{text-transform:uppercase;letter-spacing:.12em;font-size:.8em}
+.p-code b{color:#fff;font-weight:700;letter-spacing:.08em;white-space:nowrap}
+.p-launch{margin-top:auto!important;font-weight:700;color:#060606;background:#F6C641;border-radius:.1in;text-align:center}
+.p-ask{text-align:center;color:#a8a8a8;font-weight:500}
+
+/* letter 8.5 x 11 */
+.poster--letter .p-panel{padding:.55in .5in .45in}
+.poster--letter .c-mark{width:.95in;height:.95in}
+.poster--letter .c-word{height:.4in;margin-left:.25in}
+.poster--letter .p-head{font-size:.56in;margin-top:.45in}
+.poster--letter .p-head span{font-size:.36in}
+.poster--letter .p-benefits{gap:.16in;margin-top:.36in;font-size:.2in}
+.poster--letter .p-benefits li{gap:.16in}
+.poster--letter .p-tick{width:.3in;height:.3in;font-size:.2in}
+.poster--letter .p-qrblock{margin-top:.42in;gap:.35in}
+.poster--letter .p-qrbox{width:4in;height:4in;padding:.42in}          /* 3.16 in QR + white quiet zone */
+.poster--letter .p-cta{font-size:.36in}
+.poster--letter .p-ctasub{font-size:.17in;margin-top:.14in}
+.poster--letter .p-code{font-size:.16in;margin-top:.3in}
+.poster--letter .p-code b{display:block;font-size:.24in;margin-top:.04in}
+.poster--letter .p-code b.long{font-size:.17in}
+.poster--letter .p-launch{font-size:.22in;padding:.16in .2in;margin-bottom:.16in}
+.poster--letter .p-ask{font-size:.15in}
+
+/* half 5.5 x 8.5 */
+.poster--half .p-panel{padding:.36in .32in .28in;text-align:left}
+.poster--half .c-mark{width:.6in;height:.6in}
+.poster--half .c-word{height:.25in;margin-left:.16in}
+.poster--half .p-head{font-size:.34in;margin-top:.3in}
+.poster--half .p-head span{font-size:.215in}
+.poster--half .p-benefits{gap:.09in;margin-top:.24in;font-size:.128in}
+.poster--half .p-benefits li{gap:.1in}
+.poster--half .p-tick{width:.2in;height:.2in;font-size:.13in}
+.poster--half .p-qrblock{margin-top:.28in;flex-direction:column;align-items:center;text-align:center;gap:.14in}
+.poster--half .p-qrbox{width:2.9in;height:2.9in;padding:.3in}          /* 2.3 in QR + white quiet zone */
+.poster--half .p-cta{font-size:.22in}
+.poster--half .p-ctasub{display:none}
+.poster--half .p-code{font-size:.11in;margin-top:.06in}
+.poster--half .p-code b{font-size:.14in;margin-left:.04in}
+.poster--half .p-launch{font-size:.15in;padding:.1in .12in;margin-bottom:.1in}
+.poster--half .p-ask{font-size:.1in}
+
+.cutline{position:absolute;left:5.5in;top:.1in;bottom:.1in;border-left:.01in dashed #9a9a9a}
+
+/* ---------- hand-out cards: 2 x 5 grid of 3.5 x 2 in, 0.75 in side / 0.5 in top margins ---------- */
+.bleed{position:absolute;left:.6875in;top:.4375in;width:7.125in;height:10.125in;background:#060606}
+.hc-grid{position:absolute;left:.75in;top:.5in;width:7in;height:10in;display:grid;grid-template-columns:3.5in 3.5in;grid-template-rows:repeat(5,2in)}
+.crops{position:absolute;inset:0;width:8.5in;height:11in}
+.hc{width:3.5in;height:2in;position:relative;overflow:hidden}
+.hc-in{position:absolute;inset:.17in .2in}                                 /* safe area inside the trim */
+.hc--front{background:#060606;color:#fff}
+.hc--front::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 90% at 100% 0%,rgba(246,198,65,.22) 0%,rgba(246,198,65,0) 60%)}
+.hc-brand{display:flex;align-items:center}
+.hc-brand .c-mark{width:.46in;height:.46in}
+.hc-brand .c-word{height:.17in;margin-left:.11in}
+.hc-head{margin-top:.2in!important;font-size:.2in;font-weight:800;letter-spacing:-.015em;line-height:1.1}
+.hc-head span{display:block;font-size:.13in;font-weight:700;color:#F6C641;margin-top:.04in;letter-spacing:0}
+.hc-foot{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;font-size:.074in;font-weight:600;color:#bdbdbd;letter-spacing:.06em;text-transform:uppercase}
+.hc--back{background:#fff;color:#060606}
+.hc--back .hc-in{inset:.14in .17in;display:flex;align-items:center;gap:.16in}
+.hc-qr{flex:none;width:1.36in;height:1.36in;padding:.06in;margin-left:.04in}   /* QR 1.24 in; white card gives the quiet zone */
+.hc-text{min-width:0}
+.hc-cta{font-size:.125in;font-weight:800;line-height:1.12;text-wrap:balance}
+.hc-sub{font-size:.078in;font-weight:500;color:#444;margin-top:.06in!important;line-height:1.25}
+.hc-code{margin-top:.1in!important;border-top:.012in solid #F6C641;padding-top:.07in}
+.hc-code span{display:block;font-size:.06in;letter-spacing:.12em;text-transform:uppercase;color:#666;font-weight:600}
+.hc-url{font-size:.07in;font-weight:600;color:#444;margin-top:.05in!important;letter-spacing:.02em}
+.hc-code b{display:block;font-size:.098in;font-weight:800;letter-spacing:.04em;white-space:nowrap;margin-top:.02in}
+
+/* ---------- ink-saver (white) theme ---------- */
+.theme-light .p-panel{background:#fff;color:#060606;border:.03in solid #060606}
+.theme-light .p-panel::before{display:none}
+.theme-light .c-word{filter:brightness(0)}
+.theme-light .p-head span{color:#060606;text-decoration:underline;text-decoration-color:#F6C641;text-decoration-thickness:.14em;text-underline-offset:.12em;text-decoration-skip-ink:none}
+.theme-light .p-benefits li{color:#333}
+.theme-light .p-benefits b{color:#060606}
+.theme-light .p-qrbox{border:.02in solid #e3e3e3}
+.theme-light .p-cta{color:#060606}
+.theme-light .p-ctasub{color:#444}
+.theme-light .p-code{color:#555}
+.theme-light .p-code b{color:#060606}
+.theme-light .p-ask{color:#666}
+.theme-light .bleed{display:none}
+.theme-light .hc--front{background:#fff;color:#060606;box-shadow:inset 0 0 0 .01in #ddd}
+.theme-light .hc--front::before{display:none}
+.theme-light .hc-head span{color:#060606}
+.theme-light .hc-foot{color:#666}
+.theme-light .hc-brand .c-word{filter:brightness(0)}
+
+/* ---------- printing ---------- */
+@media print{
+  html,body{margin:0!important;padding:0!important;background:#fff!important}
+  .no-print,.sheet-label{display:none!important}
+  .pt-preview{display:block;padding:0;margin:0}
+  .sheet-wrap{display:block;max-width:none;width:auto}
+  .sheet-scale{width:auto!important;height:auto!important;box-shadow:none;overflow:visible}
+  .sheet{transform:none!important}
+  .sheet-wrap+.sheet-wrap .sheet{break-before:page}
+  .theme-light .hc--front{box-shadow:none}
+}

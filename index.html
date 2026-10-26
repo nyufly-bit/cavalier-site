@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cavalier — Albany's local ride</title>
+  <meta name="description" content="Cavalier is a new local rideshare app launching in Albany, NY. Save 20–30% on average compared to other apps. No surprise surges. Join the rider waitlist or sign up as a founding driver.">
+  <meta name="theme-color" content="#060606">
+  <meta property="og:title" content="Cavalier — Albany's local ride">
+  <meta property="og:description" content="Save 20–30% on average compared to other apps. No surprise surges. Join the waitlist.">
+  <meta name="twitter:description" content="Save 20–30% on average compared to other apps. No surprise surges. Join the waitlist.">
+  <meta property="og:type" content="website">
+  <!-- Domain: cavalierride.com -->
+  <meta property="og:image" content="https://cavalierride.com/assets/og-image.jpg">
+  <meta property="og:url" content="https://cavalierride.com/">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cavalier logo">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Cavalier home"><img class="brand-logo" src="assets/mark-96.png" width="34" height="34" alt=""><span class="brand-name">Cavalier</span></a>
+      <nav class="header-nav" aria-label="Sign up">
+        <a href="#signup" data-pick="rider">Ride</a>
+        <a href="drive.html" class="nav-cta">Drive</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <p class="pill" id="launch-pill">Launching in Albany, NY</p>
+        <h1>Albany's local ride.<br><span class="accent">Lower fares. No surprise surges.</span></h1>
+        <p class="hero-savings">Save 20–30% on average compared to other apps.</p>
+        <p class="lede">Cavalier is a new rideshare app built for Albany. Join the list now and we'll let you know the moment the app is ready to download.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#signup" data-pick="rider">Get early access</a>
+          <a class="btn btn-ghost" href="#signup" data-pick="driver">Become a founding driver</a>
+        </div>
+        <div class="countdown" id="hero-countdown" hidden aria-live="off">
+          <div><span data-cd="d">0</span><small>days</small></div>
+          <div><span data-cd="h">0</span><small>hrs</small></div>
+          <div><span data-cd="m">0</span><small>min</small></div>
+          <div><span data-cd="s">0</span><small>sec</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="why-riders">
+      <div class="wrap">
+        <h2 id="why-riders">Why ride Cavalier</h2>
+        <div class="cards">
+          <article class="card">
+            <div class="icon" aria-hidden="true">$</div>
+            <h3>Lower fares</h3>
+            <p>Save 20–30% on average compared to other apps. Simple, upfront local pricing.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">⇅</div>
+            <h3>No surprise surges</h3>
+            <p>Upfront prices. Set night rates, never surprise surge multipliers.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">⌂</div>
+            <h3>Local drivers</h3>
+            <p>Your neighbors behind the wheel, keeping more of what they earn.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-labelledby="why-drivers">
+      <div class="wrap">
+        <h2 id="why-drivers">Founding drivers keep 100%</h2>
+        <p class="section-lede">A simple weekly deal instead of a cut of every ride, forever.</p>
+        <ul class="perks">
+          <li><strong>20% per ride until you hit $75 for the week.</strong> After that, you keep 100% for the rest of the week.</li>
+          <li><strong>First month free</strong>, starting on launch day so it isn't used up while you wait.</li>
+          <li><strong>Paid for stops, wait time, and long pickups.</strong></li>
+          <li><strong>No "suggested" fare cuts.</strong> Your pay doesn't get trimmed.</li>
+          <li><strong>Your own referral code</strong> to share with riders.</li>
+        </ul>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="drive.html">See driver pay &amp; sign up</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="signup" aria-labelledby="signup-title">
+      <div class="wrap narrow">
+        <h2 id="signup-title">Join Cavalier</h2>
+
+        <div class="tabs" role="tablist" aria-label="Sign up as">
+          <button role="tab" id="tab-rider" aria-controls="panel-rider" aria-selected="true">I want to ride</button>
+          <button role="tab" id="tab-driver" aria-controls="panel-driver" aria-selected="false" tabindex="-1">I want to drive</button>
+        </div>
+
+        <p class="ref-note" id="ref-note" hidden>Referred by driver code <strong id="ref-code-label"></strong></p>
+
+        <!-- RIDER FORM -->
+        <div role="tabpanel" id="panel-rider" aria-labelledby="tab-rider" class="panel">
+          <form id="rider-form" class="form" novalidate data-type="rider">
+            <div class="field">
+              <label for="r-name">Full name</label>
+              <input id="r-name" name="name" type="text" autocomplete="name" required maxlength="80">
+              <p class="error" id="r-name-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="r-phone">Mobile phone</label>
+              <input id="r-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(518) 555-0123" required maxlength="20">
+              <p class="error" id="r-phone-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="r-email">Email</label>
+              <input id="r-email" name="email" type="email" autocomplete="email" required maxlength="120">
+              <p class="error" id="r-email-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="r-area">Neighborhood or ZIP <span class="opt">(optional)</span></label>
+              <input id="r-area" name="area" type="text" autocomplete="postal-code" placeholder="e.g. Center Square or 12210" maxlength="60">
+            </div>
+            <div class="check">
+              <input id="r-optin" name="optIn" type="checkbox">
+              <label for="r-optin">Yes, text and email me about Cavalier's launch and app. Message and data rates may apply. Reply STOP to opt out of texts anytime.</label>
+            </div>
+            <div class="hp" aria-hidden="true"><label for="r-web">Leave blank</label><input id="r-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+            <button class="btn btn-primary btn-block" type="submit">Join the rider list</button>
+            <p class="form-status" aria-live="polite"></p>
+            <p class="privacy">We only use your info to tell you about Cavalier.</p>
+          </form>
+        </div>
+
+        <!-- DRIVER FORM -->
+        <div role="tabpanel" id="panel-driver" aria-labelledby="tab-driver" class="panel" hidden>
+          <p class="ref-note driver-link-note">Want the full pay details and rate card? <a href="drive.html">Visit the driver page →</a></p>
+          <form id="driver-form" class="form" novalidate data-type="driver">
+            <div class="field">
+              <label for="d-name">Full name</label>
+              <input id="d-name" name="name" type="text" autocomplete="name" required maxlength="80">
+              <p class="error" id="d-name-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="d-phone">Mobile phone</label>
+              <input id="d-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(518) 555-0123" required maxlength="20">
+              <p class="error" id="d-phone-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="d-email">Email</label>
+              <input id="d-email" name="email" type="email" autocomplete="email" required maxlength="120">
+              <p class="error" id="d-email-err" aria-live="polite"></p>
+            </div>
+            <fieldset class="field">
+              <legend>Do you drive for a rideshare app now?</legend>
+              <div class="chips">
+                <label class="chip"><input type="checkbox" name="currentlyDrives" value="Uber"><span>Uber</span></label>
+                <label class="chip"><input type="checkbox" name="currentlyDrives" value="Lyft"><span>Lyft</span></label>
+                <label class="chip"><input type="checkbox" name="currentlyDrives" value="Other"><span>Other</span></label>
+                <label class="chip"><input type="checkbox" name="currentlyDrives" value="None"><span>Not right now</span></label>
+              </div>
+              <p class="error" id="d-drives-err" aria-live="polite"></p>
+            </fieldset>
+            <div class="field">
+              <label for="d-year">Vehicle year</label>
+              <input id="d-year" name="vehicleYear" type="number" inputmode="numeric" placeholder="e.g. 2019" required>
+              <p class="error" id="d-year-err" aria-live="polite"></p>
+            </div>
+            <div class="check">
+              <input id="d-optin" name="optIn" type="checkbox">
+              <label for="d-optin">Yes, text and email me about driving with Cavalier. Message and data rates may apply. Reply STOP to opt out of texts anytime.</label>
+            </div>
+            <div class="hp" aria-hidden="true"><label for="d-web">Leave blank</label><input id="d-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+            <button class="btn btn-primary btn-block" type="submit">Sign up as a founding driver</button>
+            <p class="form-status" aria-live="polite"></p>
+            <p class="privacy">We only use your info to tell you about Cavalier.</p>
+          </form>
+        </div>
+
+        <!-- THANK YOU -->
+        <div id="thanks" class="thanks" hidden tabindex="-1" aria-live="polite">
+          <div class="check-badge" aria-hidden="true">✓</div>
+          <h3 id="thanks-title">You're on the list!</h3>
+          <p id="thanks-msg"></p>
+
+          <div class="countdown countdown-lg" id="thanks-countdown" hidden>
+            <div><span data-cd="d">0</span><small>days</small></div>
+            <div><span data-cd="h">0</span><small>hrs</small></div>
+            <div><span data-cd="m">0</span><small>min</small></div>
+            <div><span data-cd="s">0</span><small>sec</small></div>
+          </div>
+          <p class="launch-line" id="thanks-launch"></p>
+
+          <div class="store-btns" id="store-btns" hidden></div>
+
+          <div class="referral" id="referral" hidden>
+            <h4>Your driver referral code</h4>
+            <p class="ref-code" id="my-ref-code"></p>
+            <div class="qr" id="qr" role="img" aria-label="QR code for your referral link"></div>
+            <div class="ref-link-row">
+              <input id="my-ref-link" type="text" readonly aria-label="Your referral link">
+              <button class="btn btn-small" type="button" id="copy-link">Copy</button>
+            </div>
+            <div class="ref-actions">
+              <button class="btn btn-ghost btn-small" type="button" id="share-link">Share</button>
+              <a class="btn btn-ghost btn-small" id="download-qr" download="cavalier-referral-qr.svg">Download QR</a>
+            </div>
+            <a class="btn btn-primary btn-small print-cards-btn" id="print-cards" href="print.html">Print seat-back cards</a>
+            <p class="fine">Riders who sign up with your link or QR code are credited to you. Screenshot this or save your link.</p>
+          </div>
+
+          <button class="btn btn-link" type="button" id="another">Sign up someone else</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <img class="footer-logo" src="assets/cavalier-logo-452.webp" width="150" height="123" alt="Cavalier" loading="lazy">
+      <p>Albany, NY · Coming soon</p>
+      <p id="footer-contact" hidden></p>
+      <p class="fine">© <span id="year"></span> Cavalier</p>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/vendor/qrcode.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

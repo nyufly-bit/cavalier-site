@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Drive for Cavalier — Albany's local ride</title>
+  <meta name="description" content="Drive for Cavalier, a new local rideshare launching in Albany, NY. 20% of each fare until you've paid $75 for the week, then you keep 100%. Founding drivers get their first month free.">
+  <meta name="theme-color" content="#060606">
+  <meta property="og:title" content="Drive for Cavalier — keep more of every fare">
+  <meta property="og:description" content="Albany's new local rideshare. 20% per fare until $75 for the week, then keep 100%. Founding drivers: first month free.">
+  <meta property="og:type" content="website">
+  <!-- Domain: cavalierride.com -->
+  <meta property="og:image" content="https://cavalierride.com/assets/og-driver.jpg">
+  <meta property="og:url" content="https://cavalierride.com/drive.html">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Drive for Cavalier. Keep more of every fare.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="driver-page">
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="Cavalier driver page, top"><img class="brand-logo" src="assets/mark-96.png" width="34" height="34" alt=""><span class="brand-name">Cavalier</span></a>
+      <nav class="header-nav" aria-label="Main">
+        <a href="./" class="nav-plain">Ride</a>
+        <a href="#pay" class="nav-plain nav-wide">Pay</a>
+        <a href="#faq" class="nav-plain nav-wide">FAQ</a>
+        <a href="#signup" class="nav-cta">Sign up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <p class="pill" id="launch-pill">Launching in Albany, NY</p>
+        <h1>Drive for Albany's local ride.<br><span class="accent">Keep more of every fare.</span></h1>
+        <p class="lede">Cavalier is a new rideshare app starting in Albany. We take 20% of each fare until you've paid $75 for the week. After that, you keep 100% for the rest of the week.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#signup">Sign up to drive</a>
+          <a class="btn btn-ghost" href="#pay">See how pay works</a>
+        </div>
+        <div class="countdown" id="hero-countdown" hidden aria-live="off">
+          <div><span data-cd="d">0</span><small>days</small></div>
+          <div><span data-cd="h">0</span><small>hrs</small></div>
+          <div><span data-cd="m">0</span><small>min</small></div>
+          <div><span data-cd="s">0</span><small>sec</small></div>
+        </div>
+        <ul class="hero-points">
+          <li><strong>$75</strong> max per week</li>
+          <li><strong>100%</strong> of fares after that</li>
+          <li><strong>1st month free</strong> for founding drivers</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PAY -->
+    <section class="section" id="pay" aria-labelledby="pay-title">
+      <div class="wrap">
+        <h2 id="pay-title">How pay works</h2>
+        <p class="section-lede">One simple weekly limit instead of a cut of every ride, forever.</p>
+        <ol class="steps">
+          <li><span class="step-n">1</span><div><strong>20% of each fare</strong> goes toward your weekly $75.</div></li>
+          <li><span class="step-n">2</span><div><strong>Once you've paid $75</strong> that week, you're done paying.</div></li>
+          <li><span class="step-n">3</span><div><strong>Keep 100%</strong> of every fare for the rest of the week.</div></li>
+        </ol>
+
+        <div class="pay-grid">
+        <div class="calc" id="calc">
+          <label class="calc-label" for="calc-range">Your fares this week</label>
+          <div class="calc-amount"><span id="calc-fares">$800</span></div>
+          <input id="calc-range" class="calc-range" type="range" min="0" max="2000" step="25" value="800" aria-describedby="calc-out">
+          <div class="calc-scale" aria-hidden="true"><span>$0</span><span>$1,000</span><span>$2,000</span></div>
+          <div class="calc-bar" aria-hidden="true"><span class="calc-bar-fee" id="calc-bar-fee"></span><span class="calc-bar-keep" id="calc-bar-keep"></span></div>
+          <dl class="calc-out" id="calc-out" aria-live="polite">
+            <div><dt>Cavalier takes</dt><dd id="calc-fee">$75</dd><p class="calc-sub" id="calc-fee-note">capped at $75</p></div>
+            <div class="calc-keep"><dt>You keep</dt><dd id="calc-keep">$725</dd><p class="calc-sub" id="calc-pct">91% of your fares</p></div>
+          </dl>
+          <p class="calc-note">Cavalier takes 20% of your fares or $75, whichever is less. Founding drivers pay $0 during their first month.</p>
+        </div>
+
+        <div class="contrast">
+          <div class="contrast-col">
+            <h3>Typical rideshare apps</h3>
+            <p>Take a big cut of every fare, on every ride, all week. The more you drive, the more they take.</p>
+          </div>
+          <div class="contrast-col contrast-us">
+            <h3>Cavalier</h3>
+            <p>20% until you've paid $75 for the week. Every fare after that is all yours.</p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RATE CARD -->
+    <section class="section section-dark" id="rates" aria-labelledby="rates-title">
+      <div class="wrap">
+        <h2 id="rates-title">What riders pay, and you earn from</h2>
+        <p class="section-lede">You're paid for the whole job, not just the miles.</p>
+        <div class="rate-grid">
+          <div class="rate"><span class="rate-val">$4.00</span><span class="rate-name">Base fare</span></div>
+          <div class="rate"><span class="rate-val">$1.30</span><span class="rate-name">Per mile</span></div>
+          <div class="rate"><span class="rate-val">$0.35</span><span class="rate-name">Per minute</span></div>
+          <div class="rate"><span class="rate-val">$9.00</span><span class="rate-name">Minimum fare</span></div>
+          <div class="rate"><span class="rate-val">$2.00</span><span class="rate-name">Each extra stop</span></div>
+          <div class="rate"><span class="rate-val">$0.50<small>/min</small></span><span class="rate-name">Wait time after the first 3 free minutes</span></div>
+          <div class="rate"><span class="rate-val">$0.40<small>/min</small></span><span class="rate-name">Long-pickup pay after 10 minutes</span></div>
+        </div>
+        <ul class="perks perks-dark">
+          <li><strong>Set night rates, never surprise surge multipliers.</strong> From 10pm to 5am, every fare gets a flat +$3 Sunday through Thursday nights and +$6 Friday and Saturday nights.</li>
+          <li><strong>No "suggested" fare decreases, ever.</strong></li>
+          <li><strong>Riders pay a small booking fee</strong> that covers platform and card fees, so those aren't taken out of your pay.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FOUNDING DRIVERS -->
+    <section class="section section-alt" id="founding" aria-labelledby="founding-title">
+      <div class="wrap">
+        <h2 id="founding-title">Founding drivers</h2>
+        <p class="section-lede">Sign up before launch to be one of Albany's first Cavalier drivers.</p>
+        <div class="cards">
+          <article class="card">
+            <div class="icon" aria-hidden="true">1</div>
+            <h3>First month free</h3>
+            <p>Your free month starts on launch day, so you don't lose it while you wait.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">↓</div>
+            <h3>A locked-in lower weekly cap</h3>
+            <p>Verified founding drivers who stay active keep a lower weekly cap. There will be a minimum activity requirement. <span class="tbd">Details to be announced</span></p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true">▦</div>
+            <h3>Your own QR code</h3>
+            <p>Get a personal QR code and link for seat-back cards. Riders who sign up through it lower your cap. <span class="tbd">Details to be announced</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIDERS WAITING -->
+    <section class="section" id="riders-waiting" aria-labelledby="waiting-title">
+      <div class="wrap">
+        <div class="promise">
+          <h2 id="waiting-title">We launch with riders waiting</h2>
+          <p>A rideshare app is only as good as its ride requests. We're building a rider waitlist before launch and starting on a set date in one busy area, so drivers aren't left sitting around without rides.</p>
+          <ul class="promise-list">
+            <li>Pre-launch rider waitlist</li>
+            <li>A set launch date</li>
+            <li>Starting in one dense part of Albany</li>
+          </ul>
+          <a class="text-link" href="./">Know someone who needs rides? Send them to the rider waitlist →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- REQUIREMENTS -->
+    <section class="section section-alt" id="requirements" aria-labelledby="req-title">
+      <div class="wrap narrow">
+        <h2 id="req-title">What you'll need</h2>
+        <p class="tbd-banner">Not final yet. Exact requirements will be shared before launch.</p>
+        <ul class="req-list">
+          <li>A valid driver's license</li>
+          <li>An eligible vehicle</li>
+          <li>Insurance</li>
+          <li>A background check</li>
+          <li>A smartphone to run the driver app</li>
+        </ul>
+        <p class="fine">Signing up now doesn't commit you to anything. We'll contact you with the full requirements and next steps.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="wrap narrow">
+        <h2 id="faq-title">Questions</h2>
+        <div class="faq">
+          <details>
+            <summary>How does the $75 weekly cap work?</summary>
+            <p>Every week, 20% of each fare goes to Cavalier until the total reaches $75. After that you keep 100% of your fares for the rest of the week. If 20% of your fares comes to less than $75, you only pay that 20%. The count starts over each week.</p>
+          </details>
+          <details>
+            <summary>When does Cavalier launch?</summary>
+            <p id="faq-launch">We'll launch on a set date once the rider waitlist is ready. Everyone who signs up will hear about it first by text and email.</p>
+          </details>
+          <details>
+            <summary>Where will I drive?</summary>
+            <p>Albany first. We're starting in one dense area so riders get quick pickups and drivers stay busy, then growing from there.</p>
+          </details>
+          <details>
+            <summary>How do payouts work?</summary>
+            <p>Payouts will be weekly. Full details will be shared before launch.</p>
+          </details>
+          <details>
+            <summary>Is this a job?</summary>
+            <p>No. Cavalier drivers will be independent drivers, not employees on a schedule. The full driver terms will be shared before launch.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- SIGN-UP -->
+    <section class="section section-alt" id="signup" aria-labelledby="signup-title">
+      <div class="wrap narrow">
+        <h2 id="signup-title">Sign up as a founding driver</h2>
+        <p class="section-lede">Takes about a minute. No commitment.</p>
+
+        <div id="driver-panel">
+          <form id="driver-form" class="form form-card" novalidate>
+            <div class="field">
+              <label for="d-name">Full name</label>
+              <input id="d-name" name="name" type="text" autocomplete="name" required maxlength="80">
+              <p class="error" id="d-name-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="d-phone">Mobile phone</label>
+              <input id="d-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(518) 555-0123" required maxlength="20">
+              <p class="error" id="d-phone-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="d-email">Email</label>
+              <input id="d-email" name="email" type="email" autocomplete="email" required maxlength="120">
+              <p class="error" id="d-email-err" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="d-area">City or area you live in</label>
+              <input id="d-area" name="area" type="text" autocomplete="address-level2" placeholder="e.g. Albany, Troy, Schenectady" required maxlength="60">
+              <p class="error" id="d-area-err" aria-live="polite"></p>
+            </div>
+            <fieldset class="field">
+              <legend>Vehicle</legend>
+              <div class="vehicle-row">
+                <div><label class="sub-label" for="d-year">Year</label><input id="d-year" name="vehicleYear" type="number" inputmode="numeric" placeholder="2019" required></div>
+                <div><label class="sub-label" for="d-make">Make</label><input id="d-make" name="vehicleMake" type="text" placeholder="Toyota" required maxlength="30"></div>
+                <div><label class="sub-label" for="d-model">Model</label><input id="d-model" name="vehicleModel" type="text" placeholder="Camry" required maxlength="40"></div>
+              </div>
+              <p class="error" id="d-year-err" aria-live="polite"></p>
+              <p class="error" id="d-make-err" aria-live="polite"></p>
+              <p class="error" id="d-model-err" aria-live="polite"></p>
+            </fieldset>
+            <fieldset class="field">
+              <legend>Do you drive for a rideshare app now?</legend>
+              <div class="chips">
+                <label class="chip"><input type="checkbox" name="currentlyDrives" value="Uber"><span>Uber</span></label>
+                <label class="chip"><input type="checkbox" name="currentlyDrives" value="Lyft"><span>Lyft</span></label>
+                <label class="chip"><input type="checkbox" name="currentlyDrives" value="Other"><span>Other</span></label>
+                <label class="chip"><input type="checkbox" name="currentlyDrives" value="None"><span>Not right now</span></label>
+              </div>
+              <p class="error" id="d-drives-err" aria-live="polite"></p>
+            </fieldset>
+            <fieldset class="field">
+              <legend>How many hours a week would you drive?</legend>
+              <div class="chips">
+                <label class="chip"><input type="radio" name="hoursPerWeek" value="Under 10"><span>Under 10</span></label>
+                <label class="chip"><input type="radio" name="hoursPerWeek" value="10-20"><span>10–20</span></label>
+                <label class="chip"><input type="radio" name="hoursPerWeek" value="20-30"><span>20–30</span></label>
+                <label class="chip"><input type="radio" name="hoursPerWeek" value="30-40"><span>30–40</span></label>
+                <label class="chip"><input type="radio" name="hoursPerWeek" value="40+"><span>40+</span></label>
+              </div>
+              <p class="error" id="d-hours-err" aria-live="polite"></p>
+            </fieldset>
+            <div class="field">
+              <label for="d-heard">How did you hear about Cavalier? <span class="opt">(optional)</span></label>
+              <select id="d-heard" name="heardAbout">
+                <option value="">Choose one</option>
+                <option>Facebook group</option>
+                <option>Facebook post or ad</option>
+                <option>Another driver</option>
+                <option>Friend or family</option>
+                <option>Flyer or seat-back card</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="d-ref">Referral code <span class="opt">(optional)</span></label>
+              <input id="d-ref" name="refCode" type="text" autocapitalize="characters" autocomplete="off" placeholder="e.g. MARCUS-ZX34" maxlength="20">
+            </div>
+            <div class="check">
+              <input id="d-optin" name="optIn" type="checkbox">
+              <label for="d-optin">Yes, text and email me about driving with Cavalier. Message and data rates may apply. Reply STOP to opt out of texts anytime.</label>
+            </div>
+            <div class="hp" aria-hidden="true"><label for="d-web">Leave blank</label><input id="d-web" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+            <button class="btn btn-primary btn-block" type="submit">Sign up as a founding driver</button>
+            <p class="form-status" aria-live="polite"></p>
+            <p class="privacy">We only use your info to tell you about driving with Cavalier.</p>
+          </form>
+        </div>
+
+        <!-- THANK YOU -->
+        <div id="thanks" class="thanks" hidden tabindex="-1" aria-live="polite">
+          <div class="check-badge" aria-hidden="true">✓</div>
+          <h3 id="thanks-title">You're on the list!</h3>
+          <p id="thanks-msg"></p>
+          <div class="countdown countdown-lg" id="thanks-countdown" hidden>
+            <div><span data-cd="d">0</span><small>days</small></div>
+            <div><span data-cd="h">0</span><small>hrs</small></div>
+            <div><span data-cd="m">0</span><small>min</small></div>
+            <div><span data-cd="s">0</span><small>sec</small></div>
+          </div>
+          <p class="launch-line" id="thanks-launch"></p>
+          <div class="store-btns" id="store-btns" hidden></div>
+
+          <div class="referral" id="referral">
+            <h4>Your rider referral code</h4>
+            <p class="ref-code" id="my-ref-code"></p>
+            <div class="qr" id="qr" role="img" aria-label="QR code for your referral link"></div>
+            <div class="ref-link-row">
+              <input id="my-ref-link" type="text" readonly aria-label="Your referral link">
+              <button class="btn btn-small" type="button" id="copy-link">Copy</button>
+            </div>
+            <div class="ref-actions">
+              <button class="btn btn-ghost btn-small" type="button" id="share-link">Share</button>
+              <a class="btn btn-ghost btn-small" id="download-qr" download="cavalier-referral-qr.svg">Download QR</a>
+            </div>
+            <a class="btn btn-primary btn-small print-cards-btn" id="print-cards" href="print.html">Print seat-back cards</a>
+            <p class="fine">Riders who join the waitlist with your link or QR code are credited to you. This is the code for your seat-back card. Use <strong>Print seat-back cards</strong> to make print-ready cards with your QR code, or screenshot this and save your link.</p>
+            <p class="fine"><button class="btn-inline" type="button" id="share-driver">Know another driver? Share this page with them.</button></p>
+          </div>
+
+          <button class="btn btn-link" type="button" id="another">Sign up another driver</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <img class="footer-logo" src="assets/cavalier-logo-452.webp" width="150" height="123" alt="Cavalier" loading="lazy">
+      <p>Albany, NY · Coming soon</p>
+      <p><a href="./">Rider waitlist</a> · <a href="#signup">Driver sign-up</a></p>
+      <p id="footer-contact" hidden></p>
+      <p class="fine">Cavalier drivers are independent drivers. Terms, requirements, and pay details are not final and will be confirmed before launch.</p>
+      <p class="fine">© <span id="year"></span> Cavalier</p>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/vendor/qrcode.js"></script>
+  <script src="js/driver.js"></script>
+</body>
+</html>
