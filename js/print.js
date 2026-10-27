@@ -69,7 +69,7 @@
   var BENEFITS = [
     ["Upfront prices.", "Know your fare before you ride."],
     ["Set night rates.", "No surprise surge multipliers."],
-    ["Local drivers.", "They keep more of every fare."]
+    ["Local drivers.", "Most of your fare goes to them."]
   ];
   function benefitsHtml() {
     return '<ul class="p-benefits">' + BENEFITS.map(function (b) {
@@ -85,7 +85,7 @@
   function poster(size, code, url, t) {
     return '<article class="poster poster--' + size + '"><div class="p-panel">' +
       '<header class="p-brand">' + MARK + WORD + "</header>" +
-      '<h2 class="p-head">Albany\u2019s local ride.<span>Save 20\u201330% on average<br>compared to other apps.</span></h2>' +
+      '<h2 class="p-head">Albany\u2019s local ride.<span>Same price every time.<br>No surge.</span></h2>' +
       benefitsHtml() +
       '<div class="p-qrblock">' +
         '<div class="p-qrbox">' + qrSvg(url) + "</div>" +
@@ -99,7 +99,7 @@
   function cardFront(t) {
     return '<div class="hc hc--front"><div class="hc-in">' +
       '<div class="hc-brand">' + MARK + WORD + "</div>" +
-      '<p class="hc-head">Albany\u2019s local ride.<span>Save 20\u201330% on average<br>compared to other apps.</span></p>' +
+      '<p class="hc-head">Albany\u2019s local ride.<span>Same price every time.<br>No surge.</span></p>' +
       '<p class="hc-foot"><span>' + esc(t.cardFoot) + "</span><span>" + esc(displayHost()) + "</span></p>" +
       "</div></div>";
   }
