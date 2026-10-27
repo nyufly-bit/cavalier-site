@@ -62,25 +62,18 @@
   showCountdown($("#hero-countdown"));
   setInterval(tick, 1000);
 
-  /* ---------- tabs ---------- */
-  var tabs = { rider: $("#tab-rider"), driver: $("#tab-driver") };
-  function pick(which, focus) {
-    $("#thanks").hidden = true;
-    Object.keys(tabs).forEach(function (k) {
-      var on = k === which;
-      tabs[k].setAttribute("aria-selected", on); tabs[k].tabIndex = on ? 0 : -1;
-      $("#panel-" + k).hidden = !on;
-    });
-    $(".tabs").hidden = false; $("#ref-note").hidden = !activeRef;
-    if (focus) tabs[which].focus();
+  /* ---------- rider form (home page is rider-only; drivers use /drive) ---------- */
+  function showForm(focus) {
+    $("#thanks").hidden = true; $("#panel-rider").hidden = false;
+    $("#ref-note").hidden = !activeRef;
+    if (focus) {
+      $("#signup").scrollIntoView({ behavior: "smooth", block: "start" });
+      $("#r-name").focus({ preventScroll: true });
+    }
   }
-  tabs.rider.addEventListener("click", function () { pick("rider"); });
-  tabs.driver.addEventListener("click", function () { pick("driver"); });
-  $(".tabs").addEventListener("keydown", function (e) {
-    if (e.key === "ArrowRight" || e.key === "ArrowLeft") { pick(tabs.rider.getAttribute("aria-selected") === "true" ? "driver" : "rider", true); e.preventDefault(); }
+  $$("[data-focus-form]").forEach(function (a) {
+    a.addEventListener("click", function (e) { e.preventDefault(); showForm(true); });
   });
-  $$("[data-pick]").forEach(function (a) { a.addEventListener("click", function () { pick(a.getAttribute("data-pick")); }); });
-  if (params.get("join") === "driver" || location.hash === "#drive") pick("driver");
 
   /* ---------- validation ---------- */
   function setErr(input, errEl, msg) {
@@ -89,41 +82,17 @@
     return !msg;
   }
   function validate(form) {
-    var p = form.id === "rider-form" ? "r" : "d", ok = true, first = null;
+    var p = "r", ok = true, first = null;
     function check(id, msg) { var i = $("#" + p + "-" + id), e = $("#" + p + "-" + id + "-err"); var good = setErr(i, e, msg); if (!good) { ok = false; first = first || i; } }
     var name = form.name.value.trim();
     check("name", name.length < 2 ? "Please enter your name." : "");
     check("phone", normPhone(form.phone.value) ? "" : "Please enter a 10-digit US mobile number.");
     check("email", /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.value.trim()) ? "" : "Please enter a valid email address.");
-    if (p === "d") {
-      var drives = $$('input[name="currentlyDrives"]:checked', form);
-      var de = $("#d-drives-err"); de.textContent = drives.length ? "" : "Please pick at least one option.";
-      if (!drives.length) { ok = false; first = first || drives[0] || $('input[name="currentlyDrives"]', form); }
-      var y = parseInt(form.vehicleYear.value, 10), max = new Date().getFullYear() + 1;
-      check("year", y >= 1990 && y <= max ? "" : "Please enter a vehicle year between 1990 and " + max + ".");
-    }
     if (first) first.focus();
     return ok;
   }
   $$(".form input").forEach(function (i) { i.addEventListener("input", function () { if (i.getAttribute("aria-invalid") === "true") { i.setAttribute("aria-invalid", "false"); var e = document.getElementById(i.getAttribute("aria-describedby")); if (e) e.textContent = ""; } }); });
-  $$('input[name="currentlyDrives"]').forEach(function (c) {
-    c.addEventListener("change", function () {
-      $("#d-drives-err").textContent = "";
-      if (!c.checked) return;
-      $$('input[name="currentlyDrives"]').forEach(function (o) { if ((c.value === "None") !== (o.value === "None")) o.checked = false; });
-    });
-  });
   $$('input[type="tel"]').forEach(function (i) { i.addEventListener("blur", function () { var d = normPhone(i.value); if (d) i.value = prettyPhone(d); }); });
-
-  /* ---------- referral code generation ---------- */
-  function makeCode(name) {
-    var base = (name.trim().split(/\s+/)[0] || "").toUpperCase().replace(/[^A-Z]/g, "").slice(0, 6) || "DRIVE";
-    var abc = "23456789ABCDEFGHJKMNPQRSTUVWXYZ", out = "", buf = new Uint32Array(4);
-    (window.crypto || window.msCrypto).getRandomValues(buf);
-    for (var i = 0; i < 4; i++) out += abc[buf[i] % abc.length];
-    return base + "-" + out;
-  }
-  function refLink(code) { return location.origin + location.pathname.replace(/index\.html$/, "") + "?ref=" + encodeURIComponent(code); }
 
   /* ---------- submit ---------- */
   function send(payload) {
@@ -168,16 +137,9 @@
         page: location.href.split("#")[0]
       };
       if (type === "rider") payload.area = form.area.value.trim();
-      if (type === "driver") {
-        payload.currentlyDrives = $$('input[name="currentlyDrives"]:checked', form).map(function (c) { return c.value; }).join(", ");
-        payload.vehicleYear = parseInt(form.vehicleYear.value, 10);
-        payload.referralCode = makeCode(payload.name);
-        payload.referralLink = refLink(payload.referralCode);
-      }
       var btn = $('button[type="submit"]', form), label = btn.textContent;
       btn.disabled = true; btn.textContent = "Sending…";
       send(payload).then(function () {
-        if (type === "driver") store(LS.myCode, payload.referralCode);
         form.reset();
         showThanks(type, payload);
       }).catch(function (err) {
@@ -199,17 +161,14 @@
   }
 
   function showThanks(type, p) {
-    $$(".panel").forEach(function (x) { x.hidden = true; });
-    $(".tabs").hidden = true; $("#ref-note").hidden = true;
+    $("#panel-rider").hidden = true; $("#ref-note").hidden = true;
     var live = isLive(), first = p.name.split(/\s+/)[0];
     $("#thanks-title").textContent = live ? "Thanks, " + first + "!" : "You're on the list, " + first + "!";
     $("#thanks-countdown").hidden = true; $("#thanks-launch").textContent = "";
     var links = storeButtons(type);
 
     if (!live) {
-      $("#thanks-msg").textContent = type === "driver"
-        ? "You're signed up as a founding driver. We'll reach out with next steps before launch."
-        : "We'll let you know as soon as the Cavalier app is ready to download.";
+      $("#thanks-msg").textContent = "We'll let you know as soon as the Cavalier app is ready to download.";
       if (launchStr) { $("#thanks-launch").textContent = "Launching " + launchStr; showCountdown($("#thanks-countdown")); }
     } else {
       var dev = device(), target = dev === "ios" ? links.ios : dev === "android" ? links.android : "";
@@ -223,40 +182,11 @@
       }
     }
 
-    var ref = $("#referral");
-    if (type === "driver") {
-      ref.hidden = false;
-      $("#my-ref-code").textContent = p.referralCode;
-      $("#my-ref-link").value = p.referralLink;
-      renderQR(p.referralLink);
-      $("#print-cards").href = "print.html?code=" + encodeURIComponent(p.referralCode);
-    } else ref.hidden = true;
-
     var t = $("#thanks"); t.hidden = false; t.focus({ preventScroll: true });
     $("#signup").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  function renderQR(text) {
-    var box = $("#qr"), dl = $("#download-qr");
-    if (typeof qrcode !== "function") { box.textContent = "QR unavailable"; return; }
-    var qr = qrcode(0, "M"); qr.addData(text); qr.make();
-    var svg = qr.createSvgTag({ cellSize: 6, margin: 2, scalable: true });
-    box.innerHTML = svg;
-    dl.href = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg.replace("<svg ", '<svg xmlns="http://www.w3.org/2000/svg" '));
-  }
-
-  $("#copy-link").addEventListener("click", function () {
-    var i = $("#my-ref-link"), b = this;
-    var done = function () { b.textContent = "Copied!"; setTimeout(function () { b.textContent = "Copy"; }, 1600); };
-    if (navigator.clipboard) navigator.clipboard.writeText(i.value).then(done, function () { i.select(); document.execCommand("copy"); done(); });
-    else { i.select(); document.execCommand("copy"); done(); }
-  });
-  $("#share-link").addEventListener("click", function () {
-    var url = $("#my-ref-link").value;
-    if (navigator.share) navigator.share({ title: "Ride with Cavalier", text: "Join Cavalier, Albany's local ride, with my code:", url: url }).catch(function () {});
-    else $("#copy-link").click();
-  });
-  $("#another").addEventListener("click", function () { pick("rider"); $("#signup").scrollIntoView({ block: "start" }); });
+  $("#another").addEventListener("click", function () { showForm(true); });
 
   /* ---------- footer ---------- */
   $("#year").textContent = new Date().getFullYear();

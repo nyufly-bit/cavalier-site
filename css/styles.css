@@ -262,3 +262,36 @@ select:focus{border-color:var(--black);outline:none;box-shadow:0 0 0 3px rgba(24
   .perks-dark{grid-template-columns:repeat(3,1fr)}
   .form-card{padding:28px}
 }
+
+/* ===== Rider home page (index.html): sign-up card in the hero — new classes only ===== */
+.hero-rider{padding:20px 0 28px}
+.hero-rider .pill{margin-bottom:12px;font-size:.8rem}
+.hero-rider h1{font-size:1.85rem;margin-bottom:10px}
+.hero-rider .hero-savings{font-size:1.05rem;margin:0 0 16px}
+.hero-grid{display:grid;gap:0}
+.lede-wide,.countdown-wide{display:none}
+.signup-card{background:#fff;color:var(--ink);border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,.35);padding:20px 18px 18px;scroll-margin-top:72px}
+.signup-card h2{font-size:1.35rem;margin:0 0 2px}
+.signup-sub{color:var(--muted);font-size:.92rem;margin:0 0 14px}
+.signup-card .form{gap:12px}
+.signup-card .thanks{border:0;box-shadow:none;padding:8px 0 0}
+.drive-line{margin:16px 0 0;text-align:center;font-size:.98rem}
+.drive-line a{color:var(--gold);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(246,198,65,.45);padding-bottom:2px}
+.drive-line a:hover{border-bottom-color:var(--gold)}
+.why-cta{margin-top:24px}
+.drive-banner{background:var(--black);color:#d0d0d0;padding:22px 0}
+.drive-banner-inner{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.drive-banner p{margin:0}
+.drive-banner strong{color:#fff}
+@media (min-width:720px){
+  .hero-rider{padding:56px 0 64px}
+  .hero-rider h1{font-size:3rem}
+  .hero-rider .hero-savings{font-size:1.35rem}
+  .hero-grid{grid-template-columns:1.1fr .9fr;gap:24px 48px;align-items:center}
+  .hero-copy{align-self:center}
+  .lede-wide{display:block}
+  .countdown-wide:not([hidden]){display:grid}
+  .signup-card{padding:28px 26px 22px}
+  .drive-line{grid-column:2;margin-top:0}
+  .drive-banner-inner{flex-direction:row;align-items:center;justify-content:space-between}
+}
